@@ -1,0 +1,2965 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4부문 주요실적</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f4f4f1;
+    --surface: #fcfcfb;
+    --surface-2: #f0efec;
+    --border: #e2e1dc;
+    --grid: #ecebe6;
+    --text-1: #0b0b0b;
+    --text-2: #52514e;
+    --text-3: #85847e;
+    --accent: #2a78d6;
+    --bar-py: #c3c2b9;
+    --bar-plan: #9ec5f4;
+    --bar-act: #2a78d6;
+    --good: #0ca30c;
+    --warning: #e09b00;
+    --critical: #d03b3b;
+    --pos-rgb: 42,120,214;
+    --neg-rgb: 208,59,59;
+    --shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #121211; --surface: #1a1a19; --surface-2: #242422; --border: #2f2f2c; --grid: #2a2a27;
+      --text-1: #ffffff; --text-2: #c3c2b7; --text-3: #8d8c84; --accent: #3987e5;
+      --bar-py: #5a5954; --bar-plan: #1c5cab; --bar-act: #5598e7;
+      --good: #2fbf2f; --warning: #fab219; --critical: #e66767;
+      --pos-rgb: 57,135,229; --neg-rgb: 230,103,103; --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --surface-2: #242422; --border: #2f2f2c; --grid: #2a2a27;
+    --text-1: #ffffff; --text-2: #c3c2b7; --text-3: #8d8c84; --accent: #3987e5;
+    --bar-py: #5a5954; --bar-plan: #1c5cab; --bar-act: #5598e7;
+    --good: #2fbf2f; --warning: #fab219; --critical: #e66767;
+    --pos-rgb: 57,135,229; --neg-rgb: 230,103,103; --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text-1);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, "Malgun Gothic", sans-serif;
+    font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 24px 16px 48px; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* Header */
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: -0.02em; }
+  .sub { color: var(--text-2); font-size: 13px; }
+  .sub b { color: var(--text-1); font-weight: 600; }
+  .icon-btn { border: 1px solid var(--border); background: var(--surface); color: var(--text-2); border-radius: 8px; padding: 6px 10px; cursor: pointer; font: inherit; font-size: 12px; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 4px; background: var(--surface-2); padding: 4px; border-radius: 10px; overflow-x: auto; margin-bottom: 16px; width: fit-content; max-width: 100%; }
+  .tab { border: 0; background: transparent; color: var(--text-2); padding: 8px 16px; border-radius: 7px; font: inherit; font-weight: 500; cursor: pointer; white-space: nowrap; }
+  .tab[aria-selected="true"] { background: var(--surface); color: var(--text-1); font-weight: 700; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+
+  /* Summary strip */
+  .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .sum-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .sum-label { color: var(--text-2); font-size: 12px; }
+  .sum-value { font-size: 24px; font-weight: 700; margin-top: 2px; letter-spacing: -0.02em; }
+  .sum-value small { font-size: 14px; color: var(--text-3); font-weight: 500; }
+
+  /* Section */
+  section { margin-top: 28px; }
+  .sec-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  h2 { font-size: 16px; margin: 0; }
+  .hint { color: var(--text-3); font-size: 12px; }
+
+  /* KPI cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: border-color .15s; }
+  .card:hover { border-color: var(--accent); }
+  .card-top { display: flex; justify-content: space-between; align-items: baseline; }
+  .card-name { font-weight: 700; font-size: 15px; }
+  .card-unit { color: var(--text-3); font-size: 12px; }
+  .card-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .card-value small { font-size: 13px; color: var(--text-3); font-weight: 500; margin-left: 2px; }
+  .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .metric { background: var(--surface-2); border-radius: 8px; padding: 8px 10px; }
+  .metric-label { font-size: 11px; color: var(--text-2); }
+  .metric-val { font-size: 16px; font-weight: 700; }
+  .metric-sub { font-size: 11px; color: var(--text-3); }
+  .status { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: var(--text-2); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .s-good .dot { background: var(--good); } .s-warning .dot { background: var(--warning); } .s-critical .dot { background: var(--critical); }
+  .up { color: var(--accent); } .down { color: var(--critical); }
+
+  .bars { display: flex; flex-direction: column; gap: 6px; }
+  .bar-row { display: grid; grid-template-columns: 56px 1fr 64px; align-items: center; gap: 8px; font-size: 12px; }
+  .bar-row .lbl { color: var(--text-2); }
+  .bar-row .val { text-align: right; color: var(--text-1); }
+  .track { height: 8px; background: var(--grid); border-radius: 4px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 0 4px 4px 0; }
+  .card-note { font-size: 11px; color: var(--text-3); margin-top: -8px; }
+  .metric.muted .metric-val { color: var(--text-3); }
+  .s-none .dot { background: var(--text-3); }
+  .card.nodata { cursor: default; border-style: dashed; }
+  .card.nodata:hover { border-color: var(--border); }
+  .empty { flex: 1; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--text-3); font-weight: 600; }
+  .empty small { font-weight: 400; font-size: 11px; }
+  .sum-label small { color: var(--text-3); }
+  .card-foot { flex-wrap: wrap; gap: 4px 12px; font-size: 11px; color: var(--text-3); border-top: 1px dashed var(--border); padding-top: 8px; display: flex; justify-content: space-between; }
+
+  /* Tables */
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 860px; }
+  th, td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+  th { font-size: 12px; color: var(--text-2); font-weight: 600; background: var(--surface-2); }
+  thead tr:first-child th { border-bottom: 1px solid var(--border); }
+  th.grp { text-align: center; }
+  td:first-child, thead tr:first-child th:first-child { text-align: left; position: sticky; left: 0; background: inherit; z-index: 1; }
+  thead tr:first-child th:first-child { background: var(--surface-2); }
+  tbody tr { background: var(--surface); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.name { font-weight: 600; }
+  td.period { text-align: center; color: var(--text-2); font-size: 12px; }
+  td.name span { color: var(--text-3); font-weight: 400; font-size: 11px; margin-left: 4px; }
+  .sep { border-left: 1px solid var(--border); }
+
+  /* Matrix */
+  .seg { display: inline-flex; background: var(--surface-2); padding: 3px; border-radius: 8px; }
+  .seg button { border: 0; background: transparent; color: var(--text-2); padding: 5px 12px; border-radius: 6px; font: inherit; font-size: 12px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--surface); color: var(--text-1); font-weight: 700; }
+  .matrix table { min-width: 680px; }
+  .matrix td.cell { text-align: center; font-weight: 600; cursor: pointer; }
+  .matrix td.cell .s { display: block; font-size: 11px; font-weight: 400; color: var(--text-2); }
+  .matrix tr.selected td.name { color: var(--accent); }
+  .matrix tbody tr:hover td.name { color: var(--accent); }
+  .legend { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-2); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -2px; }
+  .scale { display: inline-flex; align-items: center; gap: 6px; }
+  .scale .ramp { width: 120px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, rgba(var(--neg-rgb),.55), var(--surface-2) 50%, rgba(var(--pos-rgb),.55)); }
+
+  /* Chart */
+  .chart-panel { padding: 16px; }
+  .chart-title { font-weight: 700; margin-bottom: 2px; }
+  svg text { fill: var(--text-2); font-size: 11px; font-family: inherit; }
+  svg .axis { stroke: var(--border); }
+  svg .gridline { stroke: var(--grid); }
+  svg .val-lbl { fill: var(--text-1); font-weight: 600; }
+
+  #tip { position: fixed; pointer-events: none; background: var(--surface); color: var(--text-1); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12px; box-shadow: 0 4px 16px rgba(0,0,0,.12); opacity: 0; transition: opacity .1s; z-index: 10; min-width: 140px; }
+  #tip .t { font-weight: 700; margin-bottom: 4px; }
+  #tip .r { display: flex; justify-content: space-between; gap: 12px; color: var(--text-2); }
+  #tip .r b { color: var(--text-1); }
+
+  footer { margin-top: 32px; color: var(--text-3); font-size: 12px; }
+  @media (max-width: 560px) {
+    .card-value { font-size: 24px; }
+    h1 { font-size: 19px; }
+  }
+
+  /* Toolbar & month picker */
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .toolbar .tabs { margin-bottom: 0; }
+  .picker { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 6px 8px 6px 12px; }
+  .picker label { font-size: 12px; color: var(--text-2); font-weight: 600; }
+  .picker select { font: inherit; font-weight: 700; color: var(--text-1); background: var(--surface-2); border: 0; border-radius: 6px; padding: 5px 8px; cursor: pointer; }
+  .picker .range { font-size: 12px; color: var(--text-3); }
+  .card .more { font-size: 11px; color: var(--accent); font-weight: 600; }
+
+  /* Modal */
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: flex; align-items: flex-start; justify-content: center; padding: 32px 16px; overflow-y: auto; z-index: 20; }
+  .modal[hidden] { display: none; }
+  .modal-box { position: relative; background: var(--bg); border-radius: 16px; width: 100%; max-width: 1080px; padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+  .modal-head { padding-right: 44px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .modal-title { font-size: 18px; font-weight: 700; }
+  .modal-close { position: absolute; top: 16px; right: 16px; border: 0; background: var(--surface-2); color: var(--text-2); width: 32px; height: 32px; border-radius: 8px; font-size: 18px; cursor: pointer; }
+  .modal .seg { flex-wrap: wrap; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 12px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+  .kpi .l { font-size: 11px; color: var(--text-2); }
+  .kpi .v { font-size: 18px; font-weight: 700; }
+  .monthly table { min-width: 640px; }
+  .monthly tr.in td { background: rgba(var(--pos-rgb), .06); }
+  .monthly tr.out td { color: var(--text-3); }
+  .monthly tfoot td { font-weight: 700; background: var(--surface-2); border-top: 1px solid var(--border); }
+  @media (max-width: 560px) { .modal { padding: 12px 8px; } .modal-box { padding: 14px; } .chart-panel { padding: 12px; } }
+  svg .range-bg { fill: rgba(var(--pos-rgb), .07); }
+  svg .pt-lbl { font-size: 10px; fill: var(--text-3); font-variant-numeric: tabular-nums; }
+  svg .pt-lbl.cyPlan { fill: var(--text-2); }
+  svg .pt-lbl.cyAct { fill: var(--text-1); font-weight: 700; }
+  svg .line { fill: none; stroke-width: 2; }
+
+  /* ===== Hero header ===== */
+  header.hero {
+    position: relative; overflow: hidden; align-items: center;
+    background: linear-gradient(120deg, #0a2350 0%, #16408f 55%, #2a78d6 100%);
+    color: #fff; border-radius: 16px; padding: 26px 28px; margin-bottom: 18px;
+    box-shadow: 0 6px 24px rgba(16, 52, 120, .18);
+  }
+  header.hero::after {           /* 장식용 원 */
+    content: ""; position: absolute; right: -60px; top: -80px; width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.16), rgba(255,255,255,0) 70%); pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .04em; color: rgba(255,255,255,.72); margin-bottom: 6px; }
+  header.hero h1 { color: #fff; font-size: 26px; font-weight: 800; letter-spacing: -0.03em; margin: 0 0 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 12px; color: rgba(255,255,255,.8); background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 4px 10px; }
+  .chip b { color: #fff; font-weight: 700; margin-left: 2px; }
+  header.hero .icon-btn { position: relative; z-index: 1; background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.3); color: #fff; }
+  header.hero .icon-btn:hover { background: rgba(255,255,255,.22); }
+  :root[data-theme="dark"] header.hero { background: linear-gradient(120deg, #0a1a38 0%, #12346f 60%, #1c5cab 100%); box-shadow: none; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) header.hero { background: linear-gradient(120deg, #0a1a38 0%, #12346f 60%, #1c5cab 100%); box-shadow: none; } }
+
+  /* ===== 조직 탭 / 월 선택 강조 ===== */
+  .tabs { background: var(--surface); border: 1px solid var(--border); padding: 5px; gap: 4px; box-shadow: var(--shadow); }
+  .tab { padding: 9px 18px; font-size: 14px; color: var(--text-2); }
+  .tab:hover { background: var(--surface-2); color: var(--text-1); }
+  .tab[aria-selected="true"] { background: var(--accent); color: #fff; font-weight: 700; box-shadow: 0 2px 8px rgba(var(--pos-rgb), .35); }
+  .picker { border-color: rgba(var(--pos-rgb), .45); box-shadow: var(--shadow); }
+  .picker label { color: var(--accent); }
+  .picker select { background: rgba(var(--pos-rgb), .1); color: var(--accent); }
+  @media (max-width: 560px) {
+    header.hero { padding: 20px 18px; }
+    header.hero h1 { font-size: 21px; }
+    .tab { padding: 8px 12px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">GS25 · 4부문 부문지원팀</div>
+      <h1 id="title">주요실적 대시보드</h1>
+      <div class="chips" id="subtitle"></div>
+    </div>
+    <button class="icon-btn" id="themeBtn" type="button">다크 모드</button>
+  </header>
+
+  <div class="toolbar">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="picker">
+      <label for="monthSel">누계 기준월</label>
+      <select id="monthSel"></select>
+      <span class="range" id="rangeLbl"></span>
+    </div>
+  </div>
+
+  <div class="summary" id="summary"></div>
+
+  <section>
+    <div class="sec-head">
+      <h2>항목별 실적 <span class="hint" style="font-weight:400">· 카드를 누르면 월별 추이를 볼 수 있습니다</span></h2>
+      <div class="legend">
+        <span><i style="background:var(--bar-py)"></i><span class="pyLbl">전년</span> 실적</span>
+        <span><i style="background:var(--bar-plan)"></i><span class="cyLbl">올해</span> 계획</span>
+        <span><i style="background:var(--bar-act)"></i><span class="cyLbl">올해</span> 실적</span>
+      </div>
+    </div>
+    <div class="grid" id="cards"></div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2 id="detailTitle">누계 실적표</h2>
+      <span class="hint">달성률 = 실적 ÷ 계획 · 증감률 = (올해 − 전년) ÷ 전년 · 진척률 = 누계실적 ÷ 연간계획</span>
+    </div>
+    <div class="panel scroll"><table id="detail"></table></div>
+  </section>
+
+  <section class="matrix">
+    <div class="sec-head">
+      <h2 id="matrixTitle">조직별 비교</h2>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div class="legend"><span class="scale">미달 <span class="ramp"></span> 초과</span></div>
+        <div class="seg" id="matrixMode">
+          <button type="button" data-mode="plan" aria-pressed="true">계획 대비</button>
+          <button type="button" data-mode="yoy" aria-pressed="false">전년 대비</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel scroll"><table id="matrix"></table></div>
+  </section>
+
+  <section>
+    <div class="panel chart-panel">
+      <div class="sec-head" style="margin-bottom:4px">
+        <div>
+          <div class="chart-title" id="chartTitle"></div>
+          <div class="hint">지역별 누계 비교 · 비교표의 행을 클릭하면 항목이 바뀝니다</div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--bar-py)"></i><span class="pyLbl">전년</span> 실적</span>
+          <span><i style="background:var(--bar-plan)"></i><span class="cyLbl">올해</span> 계획</span>
+          <span><i style="background:var(--bar-act)"></i><span class="cyLbl">올해</span> 실적</span>
+        </div>
+      </div>
+      <div id="chart"></div>
+    </div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<!-- 월별 상세 팝업 -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="mTitle"></div>
+        <div class="hint" id="mSub"></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <div class="seg" id="mOrgs"></div>
+        <button class="modal-close" id="mClose" type="button" aria-label="닫기">×</button>
+      </div>
+    </div>
+    <div class="kpis" id="mKpis"></div>
+    <div class="panel chart-panel" style="margin-bottom:12px">
+      <div class="sec-head" style="margin-bottom:4px">
+        <div class="chart-title">월별 추이</div>
+        <div class="legend">
+          <span><i style="background:var(--bar-py)"></i><span class="pyLbl">전년</span> 실적</span>
+          <span><i style="background:var(--bar-plan)"></i><span class="cyLbl">올해</span> 계획</span>
+          <span><i style="background:var(--bar-act)"></i><span class="cyLbl">올해</span> 실적</span>
+          <span><i style="background:rgba(var(--pos-rgb),.15)"></i>누계 범위</span>
+        </div>
+      </div>
+      <div id="mChart"></div>
+    </div>
+    <div class="panel scroll monthly"><table id="mTable"></table></div>
+  </div>
+</div>
+<div id="tip"></div>
+
+<script>
+/*DATA_START*/
+// 자동 생성 영역 — build_data.py 실행 시 교체됩니다.
+// values: { 조직: { 항목: { pyPlan 전년계획, pyAct 전년실적, cyPlan 올해계획, cyAct 올해실적 } } } — 각 값은 1~12월 배열
+// 일매출(agg=ratio)은 {n: 총매출(백만), d: 영업일수} 쌍으로 저장, 화면에서 n합÷d합×1000 으로 계산
+// 값이 null 이면 화면에 '-' 로 표시됩니다.
+window.DASHBOARD_DATA = {
+  "title": "GS25 4부문 관리자용 대시보드",
+  "baseDate": "2026년 9월",
+  "period": "1월~선택월 누계",
+  "prevYear": 2025,
+  "currYear": 2026,
+  "thresholds": {
+    "good": 100,
+    "warning": 95
+  },
+  "latestMonth": 9,
+  "items": [
+    {
+      "key": "sales",
+      "name": "일매출",
+      "unit": "천원",
+      "decimals": 0,
+      "agg": "ratio",
+      "scale": 1000,
+      "note": "점당 일평균 (총매출÷영업일수)",
+      "lastMonth": 9,
+      "higherIsBetter": true
+    },
+    {
+      "key": "profit",
+      "name": "손익",
+      "unit": "억",
+      "decimals": 1,
+      "agg": "sum",
+      "note": "영업이익1 · 계획 미제공",
+      "lastMonth": 7,
+      "higherIsBetter": true
+    },
+    {
+      "key": "open",
+      "name": "출점",
+      "unit": "점",
+      "decimals": 0,
+      "agg": "sum",
+      "note": "",
+      "lastMonth": 9,
+      "higherIsBetter": true
+    },
+    {
+      "key": "close",
+      "name": "폐점",
+      "unit": "점",
+      "decimals": 0,
+      "agg": "sum",
+      "note": "",
+      "lastMonth": 9,
+      "higherIsBetter": true,
+      "compare": "count"
+    },
+    {
+      "key": "renewal",
+      "name": "리뉴얼",
+      "unit": "점",
+      "decimals": 0,
+      "agg": "sum",
+      "note": "",
+      "lastMonth": 8,
+      "higherIsBetter": true
+    },
+    {
+      "key": "snb",
+      "name": "S&B",
+      "unit": "점",
+      "decimals": 0,
+      "agg": "sum",
+      "note": "실행 · 계획 미제공",
+      "lastMonth": 8,
+      "higherIsBetter": true
+    },
+    {
+      "key": "fcs",
+      "name": "FCS",
+      "unit": "점",
+      "decimals": 0,
+      "agg": "sum",
+      "note": "신규점+기존점 · 25년 계획은 연간만 존재",
+      "lastMonth": 8,
+      "higherIsBetter": true
+    },
+    {
+      "key": "chicken",
+      "name": "치킨25",
+      "unit": "점",
+      "decimals": 0,
+      "agg": "sum",
+      "note": "원시 데이터 미포함",
+      "lastMonth": 0,
+      "higherIsBetter": true
+    }
+  ],
+  "orgs": [
+    "4부문",
+    "4부문1지역",
+    "4부문2지역",
+    "4부문3지역",
+    "4부문4지역"
+  ],
+  "values": {
+    "4부문": {
+      "sales": {
+        "pyPlan": {
+          "n": [
+            129872.412,
+            120334.841,
+            141300.954,
+            143314.67,
+            151049.709,
+            148671.418,
+            147244.222,
+            153187.004,
+            155715.341,
+            152012.064,
+            144298.237,
+            138028.662
+          ],
+          "d": [
+            88679,
+            80627,
+            90411,
+            87799,
+            90674,
+            87388,
+            89774,
+            89963,
+            88354,
+            91287,
+            88943,
+            91859
+          ]
+        },
+        "pyAct": {
+          "n": [
+            129542.601,
+            116462.915,
+            138816.046,
+            140201.696,
+            147191.479,
+            144623.428,
+            153109.823,
+            156178.475,
+            155215.798,
+            157841.032,
+            146933.583,
+            138853.508
+          ],
+          "d": [
+            88626,
+            80221,
+            89602,
+            86959,
+            89749,
+            86637,
+            89194,
+            89247,
+            87367,
+            89868,
+            87422,
+            89704
+          ]
+        },
+        "cyPlan": {
+          "n": [
+            133190.092,
+            125514.837,
+            144717.828,
+            145583.922,
+            153287.756,
+            151021.471,
+            153758.043,
+            155627.214,
+            159824.452,
+            159478.587,
+            150603.202,
+            144564.737
+          ],
+          "d": [
+            88930,
+            80080,
+            89956,
+            87646,
+            90741,
+            87861,
+            90535,
+            90555,
+            88659,
+            91909,
+            89294,
+            91971
+          ]
+        },
+        "cyAct": {
+          "n": [
+            133190.092,
+            125514.837,
+            144844.594,
+            148777.213,
+            160544.303,
+            156311.62,
+            157175.078,
+            158456.077,
+            163599.767,
+            null,
+            null,
+            null
+          ],
+          "d": [
+            89013,
+            80187,
+            90077,
+            87299,
+            90257,
+            87120,
+            89508,
+            89699,
+            87558,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "profit": {
+        "pyPlan": null,
+        "pyAct": [
+          -2.2,
+          -4.6,
+          19,
+          21.2,
+          30,
+          22.3,
+          21.9,
+          35,
+          43,
+          33.9,
+          13.5,
+          -27.1
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          4.2,
+          -6.5,
+          9.2,
+          14.9,
+          35.7,
+          29.8,
+          17.7,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "open": {
+        "pyPlan": [
+          19,
+          19,
+          23,
+          17,
+          18,
+          17,
+          18,
+          21,
+          20,
+          15,
+          16,
+          14
+        ],
+        "pyAct": [
+          14,
+          10,
+          14,
+          16,
+          20,
+          16,
+          24,
+          19,
+          19,
+          18,
+          19,
+          14
+        ],
+        "cyPlan": [
+          14,
+          17,
+          20,
+          23,
+          23,
+          23,
+          20,
+          20,
+          17,
+          16,
+          13,
+          12
+        ],
+        "cyAct": [
+          14,
+          19,
+          21,
+          17,
+          18,
+          24,
+          21,
+          19,
+          25,
+          null,
+          null,
+          null
+        ]
+      },
+      "close": {
+        "pyPlan": [
+          14,
+          18,
+          13,
+          8,
+          11,
+          16,
+          12,
+          12,
+          6,
+          11,
+          8,
+          7
+        ],
+        "pyAct": [
+          13,
+          17,
+          22,
+          15,
+          13,
+          15,
+          19,
+          17,
+          17,
+          16,
+          15,
+          12
+        ],
+        "cyPlan": [
+          16,
+          17,
+          16,
+          15,
+          10,
+          13,
+          9,
+          11,
+          8,
+          10,
+          12,
+          15
+        ],
+        "cyAct": [
+          18,
+          17,
+          19,
+          16,
+          14,
+          18,
+          16,
+          14,
+          12,
+          null,
+          null,
+          null
+        ]
+      },
+      "renewal": {
+        "pyPlan": [
+          21,
+          18,
+          13,
+          13,
+          7,
+          0,
+          2,
+          3,
+          0,
+          5,
+          2,
+          1
+        ],
+        "pyAct": [
+          17,
+          10,
+          18,
+          11,
+          7,
+          8,
+          5,
+          2,
+          2,
+          2,
+          3,
+          3
+        ],
+        "cyPlan": [
+          19,
+          24,
+          12,
+          10,
+          8,
+          4,
+          2,
+          1,
+          2,
+          4,
+          2,
+          3
+        ],
+        "cyAct": [
+          8,
+          7,
+          6,
+          11,
+          7,
+          5,
+          5,
+          7,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "snb": {
+        "pyPlan": null,
+        "pyAct": [
+          4,
+          2,
+          3,
+          4,
+          6,
+          6,
+          5,
+          4,
+          3,
+          4,
+          5,
+          2
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          1,
+          5,
+          4,
+          4,
+          7,
+          5,
+          12,
+          3,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "fcs": {
+        "pyPlan": null,
+        "pyAct": [
+          8,
+          3,
+          8,
+          8,
+          4,
+          2,
+          3,
+          3,
+          6,
+          7,
+          4,
+          3
+        ],
+        "cyPlan": [
+          4,
+          5,
+          5,
+          6,
+          7,
+          5,
+          6,
+          7,
+          5,
+          5,
+          4,
+          2
+        ],
+        "cyAct": [
+          4,
+          4,
+          7,
+          8,
+          6,
+          5,
+          10,
+          5,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "chicken": {
+        "pyPlan": null,
+        "pyAct": null,
+        "cyPlan": null,
+        "cyAct": null
+      }
+    },
+    "4부문1지역": {
+      "sales": {
+        "pyPlan": {
+          "n": [
+            33739.698,
+            30990.107,
+            37594.012,
+            38595.854,
+            40432.439,
+            39782.666,
+            38724.627,
+            40346.293,
+            40955.149,
+            40596.312,
+            38265.717,
+            35960.099
+          ],
+          "d": [
+            21799,
+            19860,
+            22485,
+            21921,
+            22642,
+            21755,
+            22208,
+            22349,
+            22149,
+            22906,
+            22296,
+            22945
+          ]
+        },
+        "pyAct": {
+          "n": [
+            32758.964,
+            29782.967,
+            36431.448,
+            37035.797,
+            38715.596,
+            37999.383,
+            39552.296,
+            40009.972,
+            40468.621,
+            40222.159,
+            38397.412,
+            35906.3
+          ],
+          "d": [
+            21760,
+            19656,
+            22325,
+            21684,
+            22280,
+            21485,
+            21902,
+            21916,
+            21778,
+            22419,
+            21942,
+            22537
+          ]
+        },
+        "cyPlan": {
+          "n": [
+            33756.907,
+            31695.569,
+            38049.118,
+            38561.666,
+            40393.369,
+            39769.474,
+            39860.494,
+            39945.002,
+            41093.605,
+            41022.117,
+            38994.541,
+            37259.373
+          ],
+          "d": [
+            22214,
+            19996,
+            22826,
+            22294,
+            22996,
+            22209,
+            22675,
+            22644,
+            22429,
+            23287,
+            22605,
+            23158
+          ]
+        },
+        "cyAct": {
+          "n": [
+            33756.907,
+            31695.569,
+            38050.964,
+            39305.774,
+            42179.056,
+            41167.491,
+            40976.068,
+            41227.073,
+            42985.792,
+            null,
+            null,
+            null
+          ],
+          "d": [
+            22214,
+            20047,
+            22860,
+            22156,
+            22934,
+            22012,
+            22452,
+            22602,
+            22286,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "profit": {
+        "pyPlan": null,
+        "pyAct": [
+          0.1,
+          -0.8,
+          7.2,
+          7.3,
+          9.7,
+          8.4,
+          6.3,
+          9.1,
+          12.9,
+          9.3,
+          4.8,
+          -5.6
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          1.5,
+          -1.1,
+          4.2,
+          5.6,
+          10.1,
+          9.3,
+          4.9,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "open": {
+        "pyPlan": [
+          5,
+          5,
+          6,
+          5,
+          5,
+          5,
+          6,
+          5,
+          5,
+          4,
+          4,
+          4
+        ],
+        "pyAct": [
+          5,
+          4,
+          4,
+          4,
+          5,
+          4,
+          5,
+          4,
+          7,
+          6,
+          6,
+          4
+        ],
+        "cyPlan": [
+          4,
+          4,
+          5,
+          6,
+          6,
+          6,
+          6,
+          5,
+          4,
+          4,
+          3,
+          3
+        ],
+        "cyAct": [
+          4,
+          5,
+          5,
+          6,
+          5,
+          6,
+          7,
+          5,
+          7,
+          null,
+          null,
+          null
+        ]
+      },
+      "close": {
+        "pyPlan": [
+          4,
+          5,
+          5,
+          1,
+          3,
+          4,
+          0,
+          4,
+          0,
+          3,
+          1,
+          1
+        ],
+        "pyAct": [
+          4,
+          6,
+          5,
+          3,
+          4,
+          4,
+          3,
+          4,
+          4,
+          4,
+          3,
+          2
+        ],
+        "cyPlan": [
+          4,
+          4,
+          1,
+          4,
+          3,
+          2,
+          4,
+          2,
+          2,
+          2,
+          4,
+          2
+        ],
+        "cyAct": [
+          4,
+          3,
+          3,
+          5,
+          5,
+          5,
+          5,
+          2,
+          4,
+          null,
+          null,
+          null
+        ]
+      },
+      "renewal": {
+        "pyPlan": [
+          2,
+          3,
+          3,
+          4,
+          2,
+          0,
+          2,
+          2,
+          0,
+          2,
+          1,
+          1
+        ],
+        "pyAct": [
+          2,
+          4,
+          2,
+          2,
+          3,
+          2,
+          1,
+          1,
+          1,
+          1,
+          2,
+          0
+        ],
+        "cyPlan": [
+          3,
+          9,
+          1,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        "cyAct": [
+          1,
+          1,
+          1,
+          4,
+          3,
+          2,
+          1,
+          4,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "snb": {
+        "pyPlan": null,
+        "pyAct": [
+          1,
+          1,
+          2,
+          3,
+          1,
+          2,
+          0,
+          2,
+          2,
+          1,
+          0,
+          0
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "fcs": {
+        "pyPlan": null,
+        "pyAct": [
+          2,
+          1,
+          3,
+          4,
+          1,
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0
+        ],
+        "cyPlan": [
+          0,
+          1,
+          2,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          0
+        ],
+        "cyAct": [
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          5,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "chicken": {
+        "pyPlan": null,
+        "pyAct": null,
+        "cyPlan": null,
+        "cyAct": null
+      }
+    },
+    "4부문2지역": {
+      "sales": {
+        "pyPlan": {
+          "n": [
+            33236.794,
+            30681.257,
+            36286.209,
+            36717.229,
+            38523.3,
+            38144.128,
+            37344.108,
+            39153.037,
+            39754.034,
+            38806.809,
+            36962.669,
+            35446.151
+          ],
+          "d": [
+            22441,
+            20422,
+            22933,
+            22166,
+            22917,
+            22073,
+            22651,
+            22665,
+            22252,
+            22945,
+            22359,
+            23095
+          ]
+        },
+        "pyAct": {
+          "n": [
+            33031.901,
+            30089.661,
+            36184.352,
+            36734.458,
+            38553.133,
+            38044.34,
+            39893.173,
+            40884.155,
+            40662.53,
+            40257.824,
+            37895.347,
+            36209.945
+          ],
+          "d": [
+            22506,
+            20442,
+            22855,
+            22213,
+            22879,
+            22082,
+            22652,
+            22711,
+            22200,
+            22741,
+            22103,
+            22718
+          ]
+        },
+        "cyPlan": {
+          "n": [
+            34841.651,
+            32606.406,
+            38767.794,
+            37870.141,
+            40067.576,
+            39683.875,
+            40025.112,
+            40912.635,
+            41747.865,
+            40995.405,
+            39138.047,
+            37236.213
+          ],
+          "d": [
+            22474,
+            20321,
+            22828,
+            22317,
+            23148,
+            22383,
+            23037,
+            23083,
+            22618,
+            23422,
+            22736,
+            23470
+          ]
+        },
+        "cyAct": {
+          "n": [
+            34841.651,
+            32606.406,
+            38780.51,
+            39652.202,
+            42578.567,
+            41516.429,
+            41426.814,
+            41589.156,
+            42816.737,
+            null,
+            null,
+            null
+          ],
+          "d": [
+            22526,
+            20349,
+            22947,
+            22307,
+            23036,
+            22244,
+            22821,
+            22784,
+            22219,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "profit": {
+        "pyPlan": null,
+        "pyAct": [
+          -0.5,
+          0.4,
+          5.2,
+          7.1,
+          9.5,
+          7.5,
+          7.5,
+          11.1,
+          12.1,
+          8.4,
+          3.6,
+          -6.6
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          1.7,
+          -1.6,
+          4.0,
+          5.7,
+          11.3,
+          10.0,
+          6.3,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "open": {
+        "pyPlan": [
+          5,
+          5,
+          5,
+          4,
+          4,
+          3,
+          4,
+          5,
+          5,
+          3,
+          4,
+          3
+        ],
+        "pyAct": [
+          3,
+          1,
+          3,
+          5,
+          6,
+          3,
+          5,
+          4,
+          3,
+          5,
+          5,
+          3
+        ],
+        "cyPlan": [
+          3,
+          5,
+          6,
+          6,
+          6,
+          6,
+          5,
+          5,
+          4,
+          4,
+          3,
+          3
+        ],
+        "cyAct": [
+          3,
+          6,
+          8,
+          3,
+          3,
+          6,
+          3,
+          6,
+          5,
+          null,
+          null,
+          null
+        ]
+      },
+      "close": {
+        "pyPlan": [
+          3,
+          4,
+          3,
+          3,
+          3,
+          4,
+          4,
+          2,
+          3,
+          4,
+          1,
+          2
+        ],
+        "pyAct": [
+          3,
+          2,
+          4,
+          4,
+          4,
+          4,
+          5,
+          5,
+          4,
+          4,
+          4,
+          3
+        ],
+        "cyPlan": [
+          1,
+          2,
+          6,
+          4,
+          2,
+          6,
+          2,
+          1,
+          2,
+          5,
+          0,
+          4
+        ],
+        "cyAct": [
+          5,
+          5,
+          4,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4,
+          null,
+          null,
+          null
+        ]
+      },
+      "renewal": {
+        "pyPlan": [
+          6,
+          4,
+          3,
+          2,
+          1,
+          0,
+          0,
+          1,
+          0,
+          3,
+          1,
+          0
+        ],
+        "pyAct": [
+          7,
+          4,
+          4,
+          3,
+          2,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "cyPlan": [
+          3,
+          3,
+          2,
+          2,
+          1,
+          2,
+          2,
+          0,
+          1,
+          1,
+          1,
+          2
+        ],
+        "cyAct": [
+          3,
+          1,
+          0,
+          3,
+          3,
+          1,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "snb": {
+        "pyPlan": null,
+        "pyAct": [
+          1,
+          0,
+          0,
+          0,
+          5,
+          2,
+          2,
+          1,
+          1,
+          1,
+          2,
+          1
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          0,
+          3,
+          2,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "fcs": {
+        "pyPlan": null,
+        "pyAct": [
+          2,
+          1,
+          2,
+          3,
+          2,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          3
+        ],
+        "cyPlan": [
+          1,
+          2,
+          0,
+          2,
+          2,
+          1,
+          1,
+          2,
+          1,
+          1,
+          2,
+          0
+        ],
+        "cyAct": [
+          0,
+          1,
+          3,
+          1,
+          1,
+          1,
+          3,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "chicken": {
+        "pyPlan": null,
+        "pyAct": null,
+        "cyPlan": null,
+        "cyAct": null
+      }
+    },
+    "4부문3지역": {
+      "sales": {
+        "pyPlan": {
+          "n": [
+            32289.944,
+            30113.889,
+            34837.754,
+            35232.81,
+            37231.834,
+            36684.965,
+            36589.823,
+            37856.187,
+            38707.688,
+            37489.035,
+            35838.218,
+            34306.205
+          ],
+          "d": [
+            22564,
+            20474,
+            22874,
+            22186,
+            22907,
+            22151,
+            22873,
+            22951,
+            22431,
+            23175,
+            22573,
+            23347
+          ]
+        },
+        "pyAct": {
+          "n": [
+            32409.824,
+            28952.112,
+            33928.155,
+            34053.874,
+            36049.792,
+            35389.75,
+            37856.273,
+            38834.942,
+            38533.265,
+            39888.955,
+            36804.705,
+            34129.745
+          ],
+          "d": [
+            22433,
+            20307,
+            22462,
+            21706,
+            22508,
+            21712,
+            22588,
+            22590,
+            21987,
+            22668,
+            22040,
+            22463
+          ]
+        },
+        "cyPlan": {
+          "n": [
+            31628.255,
+            29813.51,
+            33434.666,
+            34374.263,
+            36086.939,
+            35487.761,
+            36368.789,
+            36702.079,
+            37965.654,
+            38687.199,
+            35936.414,
+            33717.763
+          ],
+          "d": [
+            21888,
+            19627,
+            21890,
+            21272,
+            22016,
+            21371,
+            22070,
+            22047,
+            21437,
+            22182,
+            21561,
+            22228
+          ]
+        },
+        "cyAct": {
+          "n": [
+            31628.255,
+            29813.51,
+            33452.691,
+            34141.82,
+            37050.109,
+            36155.664,
+            36404.349,
+            36764.769,
+            38128.333,
+            null,
+            null,
+            null
+          ],
+          "d": [
+            21919,
+            19655,
+            21882,
+            21150,
+            21794,
+            21119,
+            21791,
+            21793,
+            21212,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "profit": {
+        "pyPlan": null,
+        "pyAct": [
+          -1.5,
+          -2.1,
+          2.8,
+          3,
+          6,
+          3.4,
+          3.8,
+          7.1,
+          9.3,
+          7.8,
+          2.7,
+          -7.7
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          0.1,
+          -2.8,
+          0.4,
+          1.5,
+          6.2,
+          4.8,
+          2.3,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "open": {
+        "pyPlan": [
+          5,
+          5,
+          6,
+          4,
+          5,
+          5,
+          5,
+          6,
+          5,
+          4,
+          4,
+          4
+        ],
+        "pyAct": [
+          2,
+          3,
+          3,
+          3,
+          5,
+          4,
+          12,
+          4,
+          5,
+          5,
+          5,
+          3
+        ],
+        "cyPlan": [
+          3,
+          4,
+          4,
+          5,
+          5,
+          6,
+          4,
+          5,
+          4,
+          4,
+          3,
+          3
+        ],
+        "cyAct": [
+          3,
+          4,
+          4,
+          2,
+          7,
+          7,
+          3,
+          3,
+          8,
+          null,
+          null,
+          null
+        ]
+      },
+      "close": {
+        "pyPlan": [
+          3,
+          5,
+          3,
+          2,
+          4,
+          4,
+          6,
+          4,
+          0,
+          1,
+          2,
+          1
+        ],
+        "pyAct": [
+          4,
+          4,
+          7,
+          5,
+          2,
+          4,
+          5,
+          4,
+          4,
+          4,
+          4,
+          3
+        ],
+        "cyPlan": [
+          6,
+          3,
+          4,
+          3,
+          1,
+          4,
+          1,
+          4,
+          3,
+          2,
+          2,
+          7
+        ],
+        "cyAct": [
+          5,
+          4,
+          6,
+          4,
+          3,
+          5,
+          4,
+          3,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "renewal": {
+        "pyPlan": [
+          5,
+          6,
+          5,
+          2,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "pyAct": [
+          5,
+          1,
+          6,
+          3,
+          1,
+          3,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "cyPlan": [
+          4,
+          6,
+          3,
+          3,
+          4,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "cyAct": [
+          0,
+          3,
+          1,
+          2,
+          0,
+          1,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "snb": {
+        "pyPlan": null,
+        "pyAct": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0,
+          2,
+          1,
+          0
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          0,
+          0,
+          1,
+          1,
+          3,
+          1,
+          3,
+          0,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "fcs": {
+        "pyPlan": null,
+        "pyAct": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        "cyPlan": [
+          2,
+          0,
+          1,
+          2,
+          1,
+          1,
+          2,
+          2,
+          1,
+          1,
+          0,
+          1
+        ],
+        "cyAct": [
+          2,
+          2,
+          0,
+          2,
+          3,
+          2,
+          0,
+          2,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "chicken": {
+        "pyPlan": null,
+        "pyAct": null,
+        "cyPlan": null,
+        "cyAct": null
+      }
+    },
+    "4부문4지역": {
+      "sales": {
+        "pyPlan": {
+          "n": [
+            30605.976,
+            28549.589,
+            32582.979,
+            32768.777,
+            34862.136,
+            34059.659,
+            34585.664,
+            35831.487,
+            36298.47,
+            35119.908,
+            33231.633,
+            32316.207
+          ],
+          "d": [
+            21875,
+            19871,
+            22119,
+            21526,
+            22208,
+            21409,
+            22042,
+            21998,
+            21522,
+            22261,
+            21715,
+            22472
+          ]
+        },
+        "pyAct": {
+          "n": [
+            31341.913,
+            27638.174,
+            32272.091,
+            32377.567,
+            33872.958,
+            33189.955,
+            35808.081,
+            36449.404,
+            35551.382,
+            37472.095,
+            33836.119,
+            32607.517
+          ],
+          "d": [
+            21927,
+            19816,
+            21960,
+            21356,
+            22082,
+            21358,
+            22052,
+            22030,
+            21402,
+            22040,
+            21337,
+            21986
+          ]
+        },
+        "cyPlan": {
+          "n": [
+            32963.279,
+            31399.352,
+            34466.25,
+            34777.852,
+            36739.871,
+            36080.36,
+            37503.648,
+            38067.498,
+            39017.328,
+            38773.865,
+            36534.2,
+            36351.388
+          ],
+          "d": [
+            22354,
+            20136,
+            22412,
+            21763,
+            22581,
+            21898,
+            22753,
+            22781,
+            22175,
+            23018,
+            22392,
+            23115
+          ]
+        },
+        "cyAct": {
+          "n": [
+            32963.279,
+            31399.352,
+            34560.43,
+            35677.417,
+            38736.57,
+            37472.036,
+            38367.847,
+            38875.079,
+            39668.905,
+            null,
+            null,
+            null
+          ],
+          "d": [
+            22354,
+            20136,
+            22388,
+            21686,
+            22493,
+            21745,
+            22444,
+            22520,
+            21841,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "profit": {
+        "pyPlan": null,
+        "pyAct": [
+          -0.3,
+          -2,
+          3.4,
+          3.3,
+          5.3,
+          2.7,
+          4.1,
+          7.5,
+          8.5,
+          8.3,
+          2.2,
+          -7
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          1.1,
+          -0.9,
+          0.6,
+          2.1,
+          8.1,
+          5.7,
+          4.1,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "open": {
+        "pyPlan": [
+          4,
+          4,
+          6,
+          4,
+          4,
+          4,
+          3,
+          5,
+          5,
+          4,
+          4,
+          3
+        ],
+        "pyAct": [
+          4,
+          2,
+          4,
+          4,
+          4,
+          5,
+          2,
+          7,
+          4,
+          2,
+          3,
+          4
+        ],
+        "cyPlan": [
+          4,
+          4,
+          5,
+          6,
+          6,
+          5,
+          5,
+          5,
+          5,
+          4,
+          4,
+          3
+        ],
+        "cyAct": [
+          4,
+          4,
+          4,
+          6,
+          3,
+          5,
+          8,
+          5,
+          5,
+          null,
+          null,
+          null
+        ]
+      },
+      "close": {
+        "pyPlan": [
+          4,
+          4,
+          2,
+          2,
+          1,
+          4,
+          2,
+          2,
+          3,
+          3,
+          4,
+          3
+        ],
+        "pyAct": [
+          2,
+          5,
+          6,
+          3,
+          3,
+          3,
+          6,
+          4,
+          5,
+          4,
+          4,
+          4
+        ],
+        "cyPlan": [
+          5,
+          8,
+          5,
+          4,
+          4,
+          1,
+          2,
+          4,
+          1,
+          1,
+          6,
+          2
+        ],
+        "cyAct": [
+          4,
+          5,
+          6,
+          4,
+          3,
+          5,
+          3,
+          5,
+          2,
+          null,
+          null,
+          null
+        ]
+      },
+      "renewal": {
+        "pyPlan": [
+          8,
+          5,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "pyAct": [
+          3,
+          1,
+          6,
+          3,
+          1,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ],
+        "cyPlan": [
+          9,
+          6,
+          6,
+          4,
+          1,
+          2,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "cyAct": [
+          4,
+          2,
+          4,
+          2,
+          1,
+          1,
+          2,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "snb": {
+        "pyPlan": null,
+        "pyAct": [
+          2,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          2,
+          1
+        ],
+        "cyPlan": null,
+        "cyAct": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          5,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "fcs": {
+        "pyPlan": null,
+        "pyAct": [
+          1,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          2,
+          1,
+          0
+        ],
+        "cyPlan": [
+          1,
+          2,
+          2,
+          1,
+          2,
+          1,
+          1,
+          1,
+          1,
+          2,
+          1,
+          1
+        ],
+        "cyAct": [
+          1,
+          0,
+          2,
+          3,
+          1,
+          1,
+          2,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "chicken": {
+        "pyPlan": null,
+        "pyAct": null,
+        "cyPlan": null,
+        "cyAct": null
+      }
+    }
+  }
+};
+/*DATA_END*/
+</script>
+<script>
+(function () {
+  const D = window.DASHBOARD_DATA;
+  const PY = D.prevYear, CY = D.currYear;
+  const ITEM = Object.fromEntries(D.items.map(i => [i.key, i]));
+  const state = { org: D.orgs[0], mode: "plan", item: D.items[0].key, month: D.latestMonth, mItem: null, mOrg: D.orgs[0] };
+
+  // ---------- 포맷 ----------
+  const fmt = (v, d = 0) => (v == null || isNaN(v)) ? "-" : v.toLocaleString("ko-KR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const signed = (v, d = 0) => (v == null || isNaN(v)) ? "-" : (v > 0 ? "+" : v < 0 ? "−" : "") + fmt(Math.abs(v), d);
+  const pct = (v) => (v == null || !isFinite(v)) ? "-" : fmt(v, 1) + "%";
+  const arrow = (v) => v > 0 ? "▲" : v < 0 ? "▼" : "";
+  const shortOrg = (o) => o === "4부문" ? "4부문" : o.replace("4부문", "");
+  const dirCls = (eff) => eff == null ? "" : eff >= 0 ? "up" : "down";
+
+  // ---------- 집계: 월 from~to 합계 (일매출은 총매출합 ÷ 영업일수합) ----------
+  function agg(it, s, from, to) {
+    if (!s) return null;
+    if (it.agg === "ratio") {
+      let n = 0, d = 0, has = false;
+      for (let i = from - 1; i < to; i++) if (s.n[i] != null && s.d[i]) { n += s.n[i]; d += s.d[i]; has = true; }
+      return has ? n / d * (it.scale || 1) : null;
+    }
+    let sum = 0, has = false;
+    for (let i = from - 1; i < to; i++) if (s[i] != null) { sum += s[i]; has = true; }
+    return has ? sum : null;
+  }
+
+  function status(effRate) {
+    if (effRate == null) return { cls: "s-none", label: "계획 없음" };
+    if (effRate >= D.thresholds.good) return { cls: "s-good", label: "달성" };
+    if (effRate >= D.thresholds.warning) return { cls: "s-warning", label: "근접" };
+    return { cls: "s-critical", label: "미달" };
+  }
+
+  // 네 값으로 비교지표 계산 (누계·월별 공용)
+  function derive(it, pyPlan, pyAct, cyPlan, cyAct, cyPlanYear = null) {
+    const ok = (...a) => a.every(x => x != null);
+    const d = it.decimals || 0, u = it.unit || "";
+    const isCount = it.compare === "count";
+    const hib = it.higherIsBetter !== false;
+    const pyRate = ok(pyPlan, pyAct) && pyPlan ? pyAct / pyPlan * 100 : null;
+    const rate = ok(cyPlan, cyAct) && cyPlan ? cyAct / cyPlan * 100 : null;
+    const planDiff = ok(cyPlan, cyAct) ? cyAct - cyPlan : null;
+    const yoyDiff = ok(pyAct, cyAct) ? cyAct - pyAct : null;
+    const yoy = ok(pyAct, cyAct) && pyAct ? yoyDiff / Math.abs(pyAct) * 100 : null;
+    const progress = ok(cyPlanYear, cyAct) && cyPlanYear ? cyAct / cyPlanYear * 100 : null;
+    const cnt = (x) => x == null ? "-" : signed(x, d) + u;
+    const effRate = isCount || rate == null ? null : (hib ? rate : 200 - rate);
+    const effYoy = isCount || yoy == null ? null : (hib ? yoy : -yoy);
+    const planTxt = isCount ? cnt(planDiff) : pct(rate);
+    const yoyTxt = isCount ? cnt(yoyDiff) : `${arrow(yoy)} ${pct(yoy == null ? null : Math.abs(yoy))}`;
+    const pyRateTxt = isCount ? cnt(ok(pyPlan, pyAct) ? pyAct - pyPlan : null) : pct(pyRate);
+    const progressTxt = isCount ? (ok(cyPlanYear, cyAct) ? "잔여 " + fmt(cyPlanYear - cyAct, d) + u : "-") : pct(progress);
+    const st = isCount ? { cls: "", label: "" } : status(effRate);
+    const chartLbl = isCount ? (planDiff != null ? "계획 " + cnt(planDiff) : "전년 " + cnt(yoyDiff))
+                             : (rate != null ? "달성 " + pct(rate) : "전년비 " + (yoy > 0 ? "+" : "") + pct(yoy));
+    return { it, d, isCount, pyPlan, pyAct, cyPlan, cyAct, cyPlanYear, pyRate, rate, planDiff, yoyDiff, yoy, progress,
+             effRate, effYoy, planTxt, yoyTxt, pyRateTxt, progressTxt, st, chartLbl };
+  }
+
+  // 누계 (1 ~ 선택월, 단 항목의 최종 실적월을 넘지 않음)
+  function calc(key, org, M = state.month) {
+    const it = ITEM[key], v = D.values[org][key] || {};
+    const m = Math.min(M, it.lastMonth || 0);
+    if (!m) return Object.assign(derive(it, null, null, null, null), { noData: true, m: 0, period: "-" });
+    const r = derive(it, agg(it, v.pyPlan, 1, m), agg(it, v.pyAct, 1, m), agg(it, v.cyPlan, 1, m), agg(it, v.cyAct, 1, m),
+                     agg(it, v.cyPlan, 1, 12));
+    r.m = m; r.period = `1~${m}월 누계`; r.noData = r.cyAct == null && r.pyAct == null;
+    return r;
+  }
+  // 특정 월 한 달
+  function calcMonth(key, org, mon) {
+    const it = ITEM[key], v = D.values[org][key] || {};
+    const act = mon <= (it.lastMonth || 0) ? agg(it, v.cyAct, mon, mon) : null;
+    return derive(it, agg(it, v.pyPlan, mon, mon), agg(it, v.pyAct, mon, mon), agg(it, v.cyPlan, mon, mon), act);
+  }
+
+  // ---------- 툴팁 ----------
+  const tip = document.getElementById("tip");
+  function showTip(e, html) {
+    tip.innerHTML = html; tip.style.opacity = 1;
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = e.clientX + 14, y = e.clientY + 14;
+    if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+    if (y + h > innerHeight - 8) y = e.clientY - h - 14;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  const hideTip = () => tip.style.opacity = 0;
+  const tipRows = (rows) => rows.map(([k, v]) => `<div class="r"><span>${k}</span><b class="num">${v}</b></div>`).join("");
+
+  // ---------- 헤더 / 탭 / 월 선택 ----------
+  document.title = D.title;
+  document.getElementById("title").textContent = D.title;
+  document.querySelectorAll(".pyLbl").forEach(e => e.textContent = PY + "년");
+  document.querySelectorAll(".cyLbl").forEach(e => e.textContent = CY + "년");
+
+  const tabs = document.getElementById("tabs");
+  D.orgs.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "tab"; b.type = "button"; b.setAttribute("role", "tab"); b.textContent = o;
+    b.onclick = () => { state.org = o; render(); };
+    tabs.appendChild(b);
+  });
+
+  const monthSel = document.getElementById("monthSel");
+  for (let m = 1; m <= D.latestMonth; m++) monthSel.add(new Option(m + "월", m, false, m === state.month));
+  monthSel.onchange = () => { state.month = +monthSel.value; render(); };
+
+  function renderHeader() {
+    document.getElementById("subtitle").innerHTML =
+      `<span class="chip">최종 실적 <b>${CY}년 ${D.latestMonth}월</b></span>` +
+      `<span class="chip">조회 <b>1~${state.month}월 누계</b></span>` +
+      `<span class="chip">비교 <b>${PY}년 vs ${CY}년</b></span>` +
+      `<span class="chip">조직 <b>${state.org}</b></span>`;
+    document.getElementById("rangeLbl").textContent = `1~${state.month}월 누계`;
+    const capped = D.items.filter(i => i.lastMonth && i.lastMonth < state.month).map(i => `${i.name} ${i.lastMonth}월`);
+    document.getElementById("footer").textContent =
+      `판정 기준: 달성 ≥ ${D.thresholds.good}%, 근접 ≥ ${D.thresholds.warning}%, 그 외 미달` +
+      (capped.length ? ` · 실적 미마감 항목은 최종 실적월까지만 집계 (${capped.join(", ")})` : "");
+    tabs.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", b.textContent === state.org));
+  }
+
+  // ---------- 요약 ----------
+  function renderSummary() {
+    const rows = D.items.map(i => calc(i.key, state.org));
+    const withPlan = rows.filter(r => r.effRate != null), withPy = rows.filter(r => r.effYoy != null);
+    const nPlan = withPlan.filter(r => r.effRate >= D.thresholds.good).length;
+    const nYoy = withPy.filter(r => r.effYoy >= 0).length;
+    const sales = calc("sales", state.org), profit = calc("profit", state.org);
+    const cards = [
+      ["계획 달성 항목", `${nPlan}<small> / ${withPlan.length}개 (계획 있는 항목)</small>`],
+      ["전년 초과 항목", `${nYoy}<small> / ${withPy.length}개</small>`],
+      [`일매출 계획 달성률 <small>(${sales.period})</small>`, `<span class="num">${pct(sales.rate)}</span>`],
+      [`손익 전년 대비 <small>(${profit.period})</small>`, `<span class="num ${dirCls(profit.effYoy)}">${profit.yoyTxt}</span>`],
+    ];
+    document.getElementById("summary").innerHTML = cards.map(([l, v]) =>
+      `<div class="sum-card"><div class="sum-label">${state.org} · ${l}</div><div class="sum-value">${v}</div></div>`).join("");
+  }
+
+  // ---------- 항목 카드 ----------
+  function renderCards() {
+    document.getElementById("cards").innerHTML = D.items.map(i => {
+      const r = calc(i.key, state.org), st = r.st;
+      if (r.noData) return `<div class="card nodata" data-item="${i.key}">
+        <div class="card-top"><span class="card-name">${i.name}</span><span class="card-unit">${i.unit}</span></div>
+        <div class="empty">데이터 준비중<small>${i.note || ""}</small></div></div>`;
+      const max = Math.max(...[r.pyAct, r.cyPlan, r.cyAct].filter(x => x != null), 1);
+      const bar = (lbl, v, color) => `<div class="bar-row"><span class="lbl">${lbl}</span>
+        <div class="track">${v == null ? "" : `<div class="fill" style="width:${Math.max(0, v / max * 100)}%;background:${color}"></div>`}</div>
+        <span class="val num">${fmt(v, r.d)}</span></div>`;
+      const foot = [
+        r.pyPlan != null ? `<span>${PY} 계획 <span class="num">${fmt(r.pyPlan, r.d)}</span> · ${r.isCount ? "차이" : "달성"} <span class="num">${r.pyRateTxt}</span></span>` : "",
+        r.cyPlanYear != null ? `<span>${CY} 연간계획 <span class="num">${fmt(r.cyPlanYear, r.d)}</span>${i.agg === "ratio" ? "" : ` · ${r.isCount ? "" : "진척 "}<span class="num">${r.progressTxt}</span>`}</span>` : ""
+      ].join("") || `<span>계획 데이터 없음</span>`;
+      return `<div class="card" data-item="${i.key}" tabindex="0" role="button" aria-label="${i.name} 월별 보기">
+        <div class="card-top"><span class="card-name">${i.name}</span><span class="card-unit">${r.period} · ${i.unit}</span></div>
+        <div class="card-value num">${fmt(r.cyAct, r.d)}<small>${i.unit}</small></div>
+        ${i.note ? `<div class="card-note">${i.note}</div>` : ""}
+        <div class="metrics">
+          <div class="metric ${r.planDiff == null ? "muted" : ""}">
+            <div class="metric-label">계획 대비</div>
+            <div class="metric-val num">${r.planTxt}</div>
+            <div class="metric-sub">${r.isCount ? `계획 <span class="num">${fmt(r.cyPlan, r.d)}${i.unit}</span>`
+              : `<span class="status ${st.cls}"><span class="dot"></span>${st.label}</span> <span class="num">${r.planDiff == null ? "" : signed(r.planDiff, r.d)}</span>`}</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">전년 대비</div>
+            <div class="metric-val num ${dirCls(r.effYoy)}">${r.yoyTxt}</div>
+            <div class="metric-sub num">${r.isCount ? `전년 ${fmt(r.pyAct, r.d)}${i.unit}` : `${signed(r.yoyDiff, r.d)} ${i.unit}`}</div>
+          </div>
+        </div>
+        <div class="bars">
+          ${bar(PY + " 실적", r.pyAct, "var(--bar-py)")}
+          ${r.cyPlan != null ? bar(CY + " 계획", r.cyPlan, "var(--bar-plan)") : ""}
+          ${bar(CY + " 실적", r.cyAct, "var(--bar-act)")}
+        </div>
+        <div class="card-foot">${foot}</div>
+        <div class="more">월별 보기 ›</div>
+      </div>`;
+    }).join("");
+    document.querySelectorAll(".card:not(.nodata)").forEach(c => {
+      c.onclick = () => openModal(c.dataset.item);
+      c.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(c.dataset.item); } };
+    });
+  }
+
+  // ---------- 누계 실적표 ----------
+  function renderDetail() {
+    document.getElementById("detailTitle").textContent = `누계 실적표 — ${state.org} (1~${state.month}월)`;
+    const head = `<thead>
+      <tr><th rowspan="2">항목</th><th rowspan="2" class="grp">기간</th><th class="grp sep" colspan="3">${PY}년</th><th class="grp sep" colspan="4">${CY}년 (계획 대비)</th><th class="grp sep" colspan="2">${CY}년 연간</th><th class="grp sep" colspan="2">전년 대비</th></tr>
+      <tr><th class="sep">계획</th><th>실적</th><th>달성률</th>
+          <th class="sep">계획</th><th>실적</th><th>차이</th><th>달성률</th>
+          <th class="sep">연간계획</th><th>진척률</th>
+          <th class="sep">증감</th><th>증감률</th></tr></thead>`;
+    const body = D.items.map(i => {
+      const r = calc(i.key, state.org), st = r.st;
+      return `<tr>
+        <td class="name">${i.name}<span>${i.unit}</span></td>
+        <td class="period">${r.period}</td>
+        <td class="num sep">${fmt(r.pyPlan, r.d)}</td><td class="num">${fmt(r.pyAct, r.d)}</td><td class="num">${r.pyRateTxt}</td>
+        <td class="num sep">${fmt(r.cyPlan, r.d)}</td><td class="num"><b>${fmt(r.cyAct, r.d)}</b></td><td class="num">${signed(r.planDiff, r.d)}</td>
+        <td class="num">${st.label ? `<span class="status ${st.cls}"><span class="dot"></span>${st.label}</span> ` : ""}<b>${r.planTxt}</b></td>
+        <td class="num sep">${fmt(r.cyPlanYear, r.d)}</td><td class="num">${i.agg === "ratio" ? "-" : r.progressTxt}</td>
+        <td class="num sep">${signed(r.yoyDiff, r.d)}</td><td class="num ${dirCls(r.effYoy)}">${r.isCount ? "-" : r.yoyTxt}</td>
+      </tr>`;
+    }).join("");
+    document.getElementById("detail").innerHTML = head + "<tbody>" + body + "</tbody>";
+  }
+
+  // ---------- 조직별 비교 ----------
+  function cellBg(delta) {
+    if (delta == null) return "transparent";
+    const a = Math.min(Math.abs(delta) / 10, 1) * 0.55;
+    return `rgba(var(${delta >= 0 ? "--pos-rgb" : "--neg-rgb"}),${a.toFixed(3)})`;
+  }
+  function renderMatrix() {
+    const plan = state.mode === "plan";
+    document.getElementById("matrixTitle").textContent = `조직별 비교 (1~${state.month}월 누계)`;
+    const head = `<thead><tr><th>항목</th>${D.orgs.map(o => `<th class="grp">${o}</th>`).join("")}</tr></thead>`;
+    const body = D.items.map(i => `<tr data-item="${i.key}" class="${i.key === state.item ? "selected" : ""}">
+      <td class="name">${i.name}<span>${i.unit}</span></td>
+      ${D.orgs.map(o => {
+        const r = calc(i.key, o);
+        const sub = plan ? `${fmt(r.cyAct, r.d)} / ${fmt(r.cyPlan, r.d)}` : `${fmt(r.cyAct, r.d)} / ${fmt(r.pyAct, r.d)}`;
+        const delta = plan ? (r.effRate == null ? null : r.effRate - 100) : r.effYoy;
+        return `<td class="cell num" data-org="${o}" style="background:${cellBg(delta)}">${plan ? r.planTxt : r.yoyTxt}<span class="s">${sub}</span></td>`;
+      }).join("")}</tr>`).join("");
+    const t = document.getElementById("matrix");
+    t.innerHTML = head + "<tbody>" + body + "</tbody>";
+    t.querySelectorAll("tbody tr").forEach(tr => tr.onclick = () => {
+      if (calc(tr.dataset.item, D.orgs[0]).noData) return;
+      state.item = tr.dataset.item; renderMatrix(); renderChart();
+    });
+    t.querySelectorAll("td.cell").forEach(td => {
+      td.onmousemove = (e) => {
+        const r = calc(td.parentElement.dataset.item, td.dataset.org);
+        showTip(e, `<div class="t">${td.dataset.org} · ${r.it.name} (${r.period})</div>` + tipRows([
+          [`${PY} 실적`, fmt(r.pyAct, r.d)], [`${CY} 계획`, fmt(r.cyPlan, r.d)], [`${CY} 실적`, fmt(r.cyAct, r.d)],
+          ["계획 대비", r.planTxt], ["전년 대비", r.yoyTxt]]));
+      };
+      td.onmouseleave = hideTip;
+    });
+  }
+  document.querySelectorAll("#matrixMode button").forEach(b => b.onclick = () => {
+    state.mode = b.dataset.mode;
+    document.querySelectorAll("#matrixMode button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    renderMatrix();
+  });
+
+  // ---------- 차트 공통 ----------
+  function niceMax(v) {
+    if (v <= 0) return 1;
+    const p = Math.pow(10, Math.floor(Math.log10(v))); const n = v / p;
+    return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p;
+  }
+  // 눈금 간격: 1·2·5 × 10^n
+  function niceStep(v) {
+    const p = Math.pow(10, Math.floor(Math.log10(v))); const n = v / p;
+    return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
+  }
+  const SERIES = [["pyAct", () => `${PY} 실적`, "var(--bar-py)"], ["cyPlan", () => `${CY} 계획`, "var(--bar-plan)"], ["cyAct", () => `${CY} 실적`, "var(--bar-act)"]];
+  const barPath = (x, yy, bw, base) => {
+    const rr = Math.min(4, bw / 2, Math.max(0, base - yy));
+    return `M${x},${base} V${yy + rr} Q${x},${yy} ${x + rr},${yy} H${x + bw - rr} Q${x + bw},${yy} ${x + bw},${yy + rr} V${base} Z`;
+  };
+
+  // 그룹 막대 (labels × 3계열). opts: {sub(i), shade:[from,to]}
+  function groupedBars(el, rows, labels, opts = {}) {
+    const W = Math.max(el.clientWidth, 240), H = opts.H || 280, m = { t: 24, r: 8, b: opts.sub ? 44 : 28, l: 52 };
+    const iw = W - m.l - m.r, ih = H - m.t - m.b, base = m.t + ih;
+    const vals = rows.flatMap(r => SERIES.map(([k]) => r[k])).filter(v => v != null);
+    const vmin = Math.min(0, ...vals), vtop = Math.max(0, ...vals);
+    const step = niceStep((vtop - vmin) / 4 || 1);
+    const vmax = Math.max(step, Math.ceil(vtop / step) * step), lo = Math.floor(vmin / step) * step;
+    const y = v => m.t + (vmax - v) / (vmax - lo) * ih;
+    const zero = y(0);
+    const gw = iw / rows.length, bw = Math.max(3, Math.min(28, (gw * 0.75 - 4) / 3)), gap = 2;
+    let s = `<svg width="${W}" height="${H}">`;
+    if (opts.shade) { const [a, b] = opts.shade; s += `<rect class="range-bg" x="${m.l + (a - 1) * gw}" y="${m.t}" width="${(b - a + 1) * gw}" height="${ih}"/>`; }
+    for (let v = lo; v <= vmax + 1e-9; v += step) {
+      const yy = y(v);
+      s += `<line class="${Math.abs(v) < 1e-9 ? "axis" : "gridline"}" x1="${m.l}" x2="${W - m.r}" y1="${yy}" y2="${yy}"/>`;
+      s += `<text x="${m.l - 8}" y="${yy + 4}" text-anchor="end" class="num">${fmt(v, step < 1 ? 1 : 0)}</text>`;
+    }
+    rows.forEach((r, gi) => {
+      const gx = m.l + gi * gw + (gw - (bw * 3 + gap * 2)) / 2;
+      SERIES.forEach(([k, , c], si) => {
+        const v = r[k]; if (v == null) return;
+        const x = gx + si * (bw + gap);
+        if (v >= 0) s += `<path d="${barPath(x, y(v), bw, zero)}" fill="${c}"/>`;
+        else s += `<rect x="${x}" y="${zero}" width="${bw}" height="${y(v) - zero}" fill="${c}"/>`;
+        if (opts.allLabels && gw >= 40) {
+          const ly = v >= 0 ? y(v) - 4 : y(v) + 11;
+          s += `<text class="pt-lbl ${k}" x="${x + bw / 2}" y="${ly}" text-anchor="middle" style="font-size:${bw < 14 ? 9 : 10}px">${fmt(v, r.d)}</text>`;
+        }
+      });
+      if (opts.valueLabels && r.cyAct != null) s += `<text class="val-lbl num" x="${gx + 2 * (bw + gap) + bw / 2}" y="${y(Math.max(0, r.cyAct)) - 6}" text-anchor="middle">${fmt(r.cyAct, r.d)}</text>`;
+      s += `<text x="${m.l + gi * gw + gw / 2}" y="${H - m.b + 18}" text-anchor="middle" style="font-weight:600;fill:var(--text-1)">${gw < 40 ? labels[gi].replace("월", "") : labels[gi]}</text>`;
+      if (opts.sub) s += `<text x="${m.l + gi * gw + gw / 2}" y="${H - m.b + 34}" text-anchor="middle" class="num">${opts.sub(r)}</text>`;
+      s += `<rect class="hit" data-i="${gi}" x="${m.l + gi * gw}" y="${m.t}" width="${gw}" height="${ih}" fill="transparent"/>`;
+    });
+    el.innerHTML = s + "</svg>";
+    bindHits(el, rows, labels);
+  }
+
+  // 꺾은선 (일매출처럼 평균형 지표)
+  function lines(el, rows, labels, opts = {}) {
+    const W = Math.max(el.clientWidth, 240), H = opts.H || 280, m = { t: 20, r: 16, b: 28, l: 52 };
+    const iw = W - m.l - m.r, ih = H - m.t - m.b;
+    const vals = rows.flatMap(r => SERIES.map(([k]) => r[k])).filter(v => v != null);
+    let lo = Math.min(...vals), hi = Math.max(...vals); const pad = (hi - lo) * 0.15 || hi * 0.05 || 1;
+    lo -= pad; hi += pad;
+    const step = niceStep((hi - lo) / 4); lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step;
+    const y = v => m.t + (hi - v) / (hi - lo) * ih;
+    const gw = iw / rows.length, x = i => m.l + gw * i + gw / 2;
+    let s = `<svg width="${W}" height="${H}">`;
+    if (opts.shade) { const [a, b] = opts.shade; s += `<rect class="range-bg" x="${m.l + (a - 1) * gw}" y="${m.t}" width="${(b - a + 1) * gw}" height="${ih}"/>`; }
+    for (let v = lo; v <= hi + 1e-9; v += step) {
+      s += `<line class="gridline" x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}"/>`;
+      s += `<text x="${m.l - 8}" y="${y(v) + 4}" text-anchor="end" class="num">${fmt(v)}</text>`;
+    }
+    SERIES.forEach(([k, , c]) => {
+      let d = "", pen = false;
+      rows.forEach((r, i) => { if (r[k] == null) { pen = false; return; } d += (pen ? "L" : "M") + x(i) + "," + y(r[k]); pen = true; });
+      if (d) s += `<path class="line" d="${d}" stroke="${c}" ${k === "cyPlan" ? 'stroke-dasharray="5 4"' : ""}/>`;
+      rows.forEach((r, i) => { if (r[k] != null) s += `<circle cx="${x(i)}" cy="${y(r[k])}" r="4" fill="${c}" stroke="var(--surface)" stroke-width="2"/>`; });
+    });
+    if (opts.allLabels && gw >= 40) rows.forEach((r, i) => {
+      const pts = SERIES.map(([k]) => ({ k, v: r[k] })).filter(p => p.v != null)
+        .map(p => ({ ...p, yy: y(p.v) + 3.5 })).sort((a, b) => a.yy - b.yy);
+      for (let j = 1; j < pts.length; j++) if (pts[j].yy - pts[j - 1].yy < 11) pts[j].yy = pts[j - 1].yy + 11;
+      const last = i === rows.length - 1, lx = last ? x(i) - 7 : x(i) + 7;
+      pts.forEach(p => s += `<text class="pt-lbl ${p.k}" x="${lx}" y="${p.yy}" text-anchor="${last ? "end" : "start"}">${fmt(p.v, r.d)}</text>`);
+    });
+    rows.forEach((r, i) => {
+      s += `<text x="${x(i)}" y="${H - m.b + 18}" text-anchor="middle" style="font-weight:600;fill:var(--text-1)">${gw < 40 ? labels[i].replace("월", "") : labels[i]}</text>`;
+      s += `<rect class="hit" data-i="${i}" x="${m.l + gw * i}" y="${m.t}" width="${gw}" height="${ih}" fill="transparent"/>`;
+    });
+    el.innerHTML = s + "</svg>";
+    bindHits(el, rows, labels);
+  }
+
+  function bindHits(el, rows, labels) {
+    el.querySelectorAll(".hit").forEach(h => {
+      h.onmousemove = (e) => {
+        const r = rows[+h.dataset.i];
+        showTip(e, `<div class="t">${labels[+h.dataset.i]} · ${r.it.name}</div>` + tipRows([
+          [`${PY} 실적`, fmt(r.pyAct, r.d)], [`${CY} 계획`, fmt(r.cyPlan, r.d)], [`${CY} 실적`, fmt(r.cyAct, r.d)],
+          ["계획 대비", r.planTxt], ["전년 대비", r.yoyTxt]]));
+      };
+      h.onmouseleave = hideTip;
+    });
+  }
+
+  // ---------- 지역별 차트 ----------
+  function renderChart() {
+    const it = ITEM[state.item];
+    const orgs = D.orgs.slice(1);
+    const rows = orgs.map(o => calc(it.key, o));
+    document.getElementById("chartTitle").textContent = `${it.name} — 지역별 ${PY}년 실적 · ${CY}년 계획 · ${CY}년 실적 (${it.unit}, ${rows[0].period})`;
+    groupedBars(document.getElementById("chart"), rows, orgs.map(shortOrg), { valueLabels: true, sub: r => r.chartLbl });
+  }
+
+  // ---------- 월별 팝업 ----------
+  const modal = document.getElementById("modal");
+  const mOrgs = document.getElementById("mOrgs");
+  D.orgs.forEach(o => {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = shortOrg(o); b.dataset.org = o;
+    b.onclick = () => { state.mOrg = o; renderModal(); };
+    mOrgs.appendChild(b);
+  });
+  function openModal(key) {
+    state.mItem = key; state.mOrg = state.org;
+    modal.hidden = false; document.body.style.overflow = "hidden";
+    renderModal();
+    document.getElementById("mClose").focus();
+  }
+  function closeModal() { modal.hidden = true; document.body.style.overflow = ""; hideTip(); }
+  document.getElementById("mClose").onclick = closeModal;
+  modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) closeModal(); });
+
+  function renderModal() {
+    const it = ITEM[state.mItem], org = state.mOrg;
+    mOrgs.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.org === org));
+    const cum = calc(it.key, org);
+    document.getElementById("mTitle").textContent = `${it.name} 월별 실적 — ${org}`;
+    document.getElementById("mSub").textContent = `단위 ${it.unit} · ${it.note ? it.note + " · " : ""}${CY}년 실적은 ${it.lastMonth}월까지`;
+    document.getElementById("mKpis").innerHTML = [
+      [`${cum.period} ${PY} 실적`, fmt(cum.pyAct, cum.d)],
+      [`${cum.period} ${CY} 계획`, fmt(cum.cyPlan, cum.d)],
+      [`${cum.period} ${CY} 실적`, fmt(cum.cyAct, cum.d)],
+      ["계획 대비", cum.planTxt],
+      ["전년 대비", `<span class="${dirCls(cum.effYoy)}">${cum.yoyTxt}</span>`],
+    ].map(([l, v]) => `<div class="kpi"><div class="l">${l}</div><div class="v num">${v}</div></div>`).join("");
+
+    const rows = Array.from({ length: 12 }, (_, i) => calcMonth(it.key, org, i + 1));
+    const labels = rows.map((_, i) => (i + 1) + "월");
+    const el = document.getElementById("mChart");
+    const opts = { H: 300, shade: cum.m ? [1, cum.m] : null, allLabels: true };
+    (it.agg === "ratio" ? lines : groupedBars)(el, rows, labels, opts);
+
+    const head = `<thead><tr><th>월</th><th class="sep">${PY} 계획</th><th>${PY} 실적</th><th class="sep">${CY} 계획</th><th>${CY} 실적</th><th class="sep">계획 대비</th><th>전년 대비</th></tr></thead>`;
+    const body = rows.map((r, i) => {
+      const mon = i + 1, cls = mon <= cum.m ? "in" : (mon > it.lastMonth ? "out" : "");
+      return `<tr class="${cls}"><td class="name">${mon}월</td>
+        <td class="num sep">${fmt(r.pyPlan, r.d)}</td><td class="num">${fmt(r.pyAct, r.d)}</td>
+        <td class="num sep">${fmt(r.cyPlan, r.d)}</td><td class="num"><b>${fmt(r.cyAct, r.d)}</b></td>
+        <td class="num sep">${r.st.label && r.effRate != null ? `<span class="status ${r.st.cls}"><span class="dot"></span>${r.st.label}</span> ` : ""}${r.planTxt}</td>
+        <td class="num ${dirCls(r.effYoy)}">${r.yoyTxt}</td></tr>`;
+    }).join("");
+    const foot = `<tfoot><tr><td>${cum.period}</td>
+      <td class="num sep">${fmt(cum.pyPlan, cum.d)}</td><td class="num">${fmt(cum.pyAct, cum.d)}</td>
+      <td class="num sep">${fmt(cum.cyPlan, cum.d)}</td><td class="num">${fmt(cum.cyAct, cum.d)}</td>
+      <td class="num sep">${cum.planTxt}</td><td class="num ${dirCls(cum.effYoy)}">${cum.yoyTxt}</td></tr></tfoot>`;
+    document.getElementById("mTable").innerHTML = head + "<tbody>" + body + "</tbody>" + foot;
+  }
+
+  // ---------- 테마 ----------
+  const themeBtn = document.getElementById("themeBtn");
+  const isDark = () => document.documentElement.dataset.theme ? document.documentElement.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  const syncThemeBtn = () => themeBtn.textContent = isDark() ? "라이트 모드" : "다크 모드";
+  try { const t = localStorage.getItem("dash-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  themeBtn.onclick = () => {
+    const t = isDark() ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+    try { localStorage.setItem("dash-theme", t); } catch (e) {}
+    syncThemeBtn();
+  };
+  syncThemeBtn();
+
+  // ---------- 렌더 ----------
+  function render() {
+    renderHeader(); renderSummary(); renderCards(); renderDetail(); renderMatrix(); renderChart();
+    if (!modal.hidden) renderModal();
+  }
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { renderChart(); if (!modal.hidden) renderModal(); }, 150); });
+  render();
+})();
+</script>
+</body>
+</html>
